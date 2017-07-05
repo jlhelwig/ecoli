@@ -1,6 +1,11 @@
-var Twit = require(‘twit’);
-var TwitterBot = require(‘node-twitterbot’).TwitterBot;
-var Bot = new TwitterBot({
+ Twit = require("twit");
+ TwitterBot = require("node-twitterbot").TwitterBot;
+ Bot = new TwitterBot({
+  // consumer_secret: "AXLp0c24GpT4GjN4zldDqW046Ozc6bcpVdRkUhU8A2kIBot0fO",
+  // consumer_key: "cctrYXLK44s7QrEsZuVFZT84v",
+  // access_token: "882614726164963328-5XCURoxnkknKbHNN5zuov7BnHJDOZui",
+  // access_token_secret: "vByPAfAuNxwvxhNjLXQWaNSLrnbmvjO2jgLrR9qpiGeXm"
+  //for deployment in heroku
  consumer_key: process.env.BOT_CONSUMER_KEY,
  consumer_secret: process.env.BOT_CONSUMER_SECRET,
  access_token: process.env.BOT_ACCESS_TOKEN,
@@ -18,6 +23,3 @@ function chooseRandom(myArray) {
 }
 var phrase = chooseRandom(phraseArray) + ", " + chooseRandom(phraseArray);
 Bot.tweet(phrase);
-// var tweetAction = Bot.addAction("tweet", function(twitter, action, tweet) {
-//   Bot.tweet("I'm posting a tweet!");
-// });
