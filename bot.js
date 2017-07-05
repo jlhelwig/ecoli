@@ -16,5 +16,8 @@ var phraseArray = [ "going swimming in a creek in Austin? Check for more info",
 function chooseRandom(myArray) {
   return myArray[Math.floor(Math.random() * myArray.length)];
 }
-var phrase = chooseRandom(phraseArray) + ", " + chooseRandom(phraseArray);
-Bot.tweet(phrase);
+// var phrase = chooseRandom(phraseArray) + ", " + chooseRandom(phraseArray);
+// Bot.tweet(phrase);
+var tweetAction = Bot.addAction("tweet", function(twitter, action, tweet) {
+  Bot.tweet("I'm posting a tweet!");
+});
