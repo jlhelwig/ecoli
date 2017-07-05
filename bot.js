@@ -6,12 +6,12 @@ var Bot = new TwitterBot({
  access_token: process.env.BOT_ACCESS_TOKEN,
  access_token_secret: process.env.BOT_ACCESS_TOKEN_SECRET
 });
-var phraseArray = [ "hey twitter, going swimming in a creek in Austin? Check here for more info!",
-                    "im tweeting--have you seen my count?",
-                    "tweet tweet--Austin TX--check the bacteria levels!",
+var phraseArray = [ "going swimming in a creek in Austin? Check for more info",
+                    "im tweeting--have you seen my count",
+                    "tweet tweet--Austin TX--check the bacteria levels",
                     "tweetstorm? recent rainstorm? hmmmm....",
                     "looking forward to giving you a count, still in development!",
-                    "it me, Colin the fecal e.coli! check out my numbers! -- coming soon!"
+                    "it me, Colin the fecal e.coli! check out my numbers"
                   ];
 function chooseRandom(myArray) {
   return myArray[Math.floor(Math.random() * myArray.length)];
