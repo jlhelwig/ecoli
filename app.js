@@ -5,7 +5,7 @@ require('dotenv').config()
 var Twit = require("twit");
 var TwitterBot = require("node-twitterbot").TwitterBot;
 var dateMax = new Date();
-var prevDate = new Date().setDate(dateMax.getDate()-70);
+var prevDate = new Date().setDate(dateMax.getDate()-90);
 dateMax = dateMax.toISOString();
 var dateMin = new Date(prevDate);
 var waterThing =[]
@@ -21,7 +21,6 @@ var options = {
     uri: uriThing,
     qs: {
         $$app_token: process.env.BOT_APP_TOKEN
-
     },
 
     json: true
@@ -29,12 +28,8 @@ var options = {
 
 request(options)
     .then(function (data) {
-        // console.log('****data is****: ', data);
-        waterThing = data
 
-        // console.log('this is the waterThing',waterThing)
-        // console.log('this is the first parameter in waterThing', waterThing[0].result);
-        // console.log('this is where it was tested',waterThing[0].location.coordinates);
+        waterThing = data
 
           Bot = new TwitterBot({
             consumer_key: process.env.BOT_CONSUMER_KEY,
@@ -43,9 +38,17 @@ request(options)
             access_token_secret: process.env.BOT_ACCESS_TOKEN_SECRET
           })
           console.log(waterThing)
-          var shortDate = new Date(waterThing[0].sample_date).toLocaleDateString()
-          console.log(shortDate);
-          Bot.tweet(`E Coli count on ${shortDate} was ${waterThing[0].result}/100ml \u{2705} \u{1f3ca} at www.google.com/maps/place/${waterThing[0].lat_dd_wgs84},${waterThing[0].lon_dd_wgs84}`);
+            for (let i=0; i<waterThing.length; i++){
+              var shortDate = new Date(waterThing[i].sample_date).toLocaleDateString()
+              console.log(shortDate);
+              if (waterThing[i].result<125){
+                Bot.tweet(`E Coli count on ${shortDate} was ${waterThing[i].result}/100ml \u{2705} \u{1f3ca} at www.google.com/maps/place/${waterThing[i].lat_dd_wgs84},${waterThing[i].lon_dd_wgs84}`);
+                }
+              else {
+                Bot.tweet(`E Coli count on ${shortDate} was ${waterThing[i].result}/100ml \u{1f6ab} \u{1f4a9} at www.google.com/maps/place/${waterThing[i].lat_dd_wgs84},${waterThing[i].lon_dd_wgs84}`);
+
+              }
+            }
           // Bot.tweet("\u{2705}"+"\u{1f3ca}"+" or "+"\u{1f6ab}"+"\u{1f4a9}")
     })
 //
